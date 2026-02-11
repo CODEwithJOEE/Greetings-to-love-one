@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Monthssary, My Baby 💗</title>
+
+  <!-- Cute fonts (optional). If offline, it will fall back to system fonts. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg1:#fff4f8;
+      --bg2:#f3f7ff;
+      --ink:#2b2b2b;
+      --muted:#616161;
+      --pink:#ff5aa5;
+      --rose:#ff8fc3;
+      --lav:#8a7dff;
+      --card:rgba(255,255,255,.72);
+      --stroke:rgba(255,255,255,.55);
+      --shadow: 0 18px 60px rgba(25, 25, 40, .12);
+      --shadow2: 0 10px 28px rgba(25, 25, 40, .10);
+      --radius: 22px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: "Quicksand", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 900px at 20% 10%, rgba(255,90,165,.20), transparent 55%),
+        radial-gradient(900px 700px at 85% 20%, rgba(138,125,255,.18), transparent 55%),
+        radial-gradient(900px 700px at 40% 95%, rgba(255,143,195,.20), transparent 55%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+
+    /* Floating hearts background */
+    .hearts{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      overflow:hidden;
+      z-index:0;
+      filter: blur(.2px);
+    }
+    .heart{
+      position:absolute;
+      width:14px;
+      height:14px;
+      transform: rotate(45deg);
+      opacity:.28;
+      animation: floatUp linear infinite;
+      background: rgba(255,90,165,.75);
+      border-radius: 3px;
+      box-shadow: 0 8px 22px rgba(255,90,165,.25);
+    }
+    .heart::before, .heart::after{
+      content:"";
+      position:absolute;
+      width:14px;
+      height:14px;
+      border-radius: 50%;
+      background: inherit;
+    }
+    .heart::before{ left:-7px; top:0; }
+    .heart::after{ left:0; top:-7px; }
+
+    @keyframes floatUp{
+      from { transform: translateY(110vh) rotate(45deg) scale(.9); }
+      to   { transform: translateY(-20vh) rotate(45deg) scale(1.15); }
+    }
+
+    /* Layout */
+    .wrap{
+      position:relative;
+      z-index:1;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 26px 18px 70px;
+    }
+
+    header{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      margin-top: 6px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(255,255,255,.55);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow2);
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .badge b{ color: var(--ink); }
+
+    .btn{
+      appearance:none;
+      border:0;
+      cursor:pointer;
+      padding: 11px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing:.2px;
+      background: linear-gradient(135deg, var(--pink), var(--lav));
+      color:white;
+      box-shadow: 0 14px 32px rgba(255,90,165,.22);
+      transition: transform .15s ease, filter .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+    .btn:active{ transform: translateY(0px) scale(.99); }
+
+    .hero{
+      margin-top: 18px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(255,255,255,.70), rgba(255,255,255,.52));
+      border: 1px solid var(--stroke);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .heroInner{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      padding: 22px;
+      align-items:center;
+    }
+
+    @media (max-width: 820px){
+      .heroInner{ grid-template-columns: 1fr; }
+    }
+
+    .kicker{
+      display:inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,90,165,.12);
+      border: 1px solid rgba(255,90,165,.16);
+      color: #b42063;
+      font-weight:700;
+      font-size: 13px;
+      letter-spacing:.3px;
+    }
+
+    h1{
+      margin: 10px 0 10px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(34px, 5vw, 54px);
+      line-height: 1.05;
+    }
+
+    .sub{
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 55ch;
+    }
+
+    .heroCard{
+      border-radius: 18px;
+      background: rgba(255,255,255,.66);
+      border: 1px solid rgba(255,255,255,.6);
+      box-shadow: var(--shadow2);
+      padding: 16px 16px 14px;
+      position:relative;
+      overflow:hidden;
+      min-height: 220px;
+    }
+
+    .photoGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .ph{
+      height: 112px;
+      border-radius: 14px;
+      background:
+        linear-gradient(135deg, rgba(255,90,165,.16), rgba(138,125,255,.16));
+      border: 1px dashed rgba(255,90,165,.28);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: rgba(43,43,43,.65);
+      font-weight:700;
+      font-size: 12px;
+      text-align:center;
+      padding: 10px;
+      overflow:hidden;
+    }
+    .ph img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .section{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 820px){
+      .section{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow2);
+      padding: 18px 18px 16px;
+    }
+
+    .titleRow{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    h2{
+      margin:0;
+      font-family:"Playfair Display", Georgia, serif;
+      font-size: 22px;
+      letter-spacing:.2px;
+    }
+
+    .pill{
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #6a1b44;
+      background: rgba(255,90,165,.12);
+      border: 1px solid rgba(255,90,165,.18);
+      white-space:nowrap;
+    }
+
+    .letter{
+      color: var(--muted);
+      line-height: 1.75;
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .timeline{
+      display:grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .moment{
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+      padding: 12px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(255,255,255,.5);
+    }
+    .dot{
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      margin-top: 4px;
+      background: linear-gradient(135deg, var(--pink), var(--lav));
+      box-shadow: 0 8px 20px rgba(255,90,165,.25);
+      flex: 0 0 auto;
+    }
+    .moment b{
+      display:block;
+      margin-bottom: 2px;
+      font-size: 14px;
+    }
+    .moment span{
+      display:block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .footer{
+      text-align:center;
+      color: rgba(43,43,43,.6);
+      margin-top: 16px;
+      font-size: 13px;
+    }
+
+    /* Modal */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background: rgba(15, 10, 20, .42);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding: 18px;
+      z-index: 20;
+    }
+    .overlay.show{ display:flex; }
+    .modal{
+      max-width: 720px;
+      width: 100%;
+      border-radius: 26px;
+      background: rgba(255,255,255,.80);
+      border: 1px solid rgba(255,255,255,.65);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 30px 90px rgba(0,0,0,.25);
+      overflow:hidden;
+      position:relative;
+    }
+    .modalTop{
+      padding: 18px 18px 10px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap: 12px;
+    }
+    .x{
+      border:0;
+      background: rgba(255,90,165,.14);
+      color:#7a1c49;
+      font-weight:900;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      cursor:pointer;
+    }
+    .modalBody{
+      padding: 0 18px 18px;
+      display:grid;
+      gap: 12px;
+    }
+    .bigMessage{
+      font-family:"Playfair Display", Georgia, serif;
+      font-size: clamp(22px, 3.5vw, 34px);
+      margin: 0;
+      line-height: 1.18;
+    }
+    .smallMessage{
+      margin:0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+    .gift{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 8px;
+    }
+    .tag{
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(138,125,255,.12);
+      border: 1px solid rgba(138,125,255,.18);
+      color: #3f35a5;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    /* Little sparkle */
+    .shine{
+      position:absolute;
+      inset:-60px;
+      background: conic-gradient(from 210deg, transparent 0 30%, rgba(255,255,255,.22), transparent 40% 100%);
+      transform: rotate(12deg);
+      opacity:.35;
+      pointer-events:none;
+      animation: sweep 7s ease-in-out infinite;
+    }
+    @keyframes sweep{
+      0%, 100%{ transform: translateX(-20%) rotate(12deg); }
+      50%{ transform: translateX(25%) rotate(12deg); }
+    }
+
+    /* Tiny toast */
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:18px;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(255,255,255,.6);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow2);
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+      color: rgba(43,43,43,.72);
+      display:none;
+      z-index: 25;
+    }
+    .toast.show{ display:block; }
+  </style>
+</head>
+
+<body>
+  <div class="hearts" id="hearts"></div>
+
+  <div class="wrap">
+    <header>
+<div class="badge">
+  💞 <b id="monthsOrdinal">47th</b> monthssary •
+  <span id="dateText"></span> •
+  <span id="sinceText"></span>
+</div>
+
+      <button class="btn" id="openBtn">Open Surprise 🎁</button>
+    </header>
+
+    <section class="hero">
+      <div class="shine"></div>
+      <div class="heroInner">
+        <div>
+          <span class="kicker">Happy Monthssary</span>
+          <h1>Hi <span id="babyName">Baby</span> 💗</h1>
+          <p class="sub" id="heroLine">
+            Another month with you feels like a soft sunrise—warm, calm, and something I always want to wake up to.
+          </p>
+        </div>
+
+        <div class="heroCard">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:10px;">
+            <div style="font-weight:800;">Our little gallery</div>
+          </div>
+          <div class="photoGrid">
+            <!-- Replace with your own images -->
+            <div class="ph">
+              <img alt="Photo 1" src="img/1.jpg">
+            </div>
+            <div class="ph">
+              <img alt="Photo 2" src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=900&q=70">
+            </div>
+            <div class="ph">
+              <img alt="Photo 3" src="https://images.unsplash.com/photo-1516589091380-5d8e67c3a2a6?auto=format&fit=crop&w=900&q=70">
+            </div>
+            <div class="ph">
+              <img alt="Photo 4" src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=900&q=70">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card">
+        <div class="titleRow">
+          <h2>My message for you</h2>
+          <span class="pill">from me → to you</span>
+        </div>
+
+        <p class="letter" id="letter">
+          Baby, happy monthssary. Thank you for being my safe place, my favorite person, my best friend, my companion.
+          I love the way you make ordinary moments feel special. I’m proud of us of how we keep choosing each other.
+          <br><br>
+          This month, I’m wishing for more laughs, more hugs, and more fights lol.
+          Always remember: I’m with you, and I’m grateful for you; I LOVE YOU. 💗
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="titleRow">
+          <h2>Our little timeline</h2>
+          <span class="pill">tiny memories</span>
+        </div>
+
+        <div class="timeline" id="timeline">
+          <div class="moment">
+            <div class="dot"></div>
+            <div>
+              <b>Our favorite thing</b>
+              <span>“Late-night calls”, Tawanan, Away at Tampuhan. Pati pala Landian HAAHAHA.</span>
+            </div>
+          </div>
+
+          <div class="moment">
+            <div class="dot"></div>
+            <div>
+              <b>My promise</b>
+              <span>I’ll keep loving you gently, honestly, and loudly—every month, every day.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer">Made with love • 💗</div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Surprise Modal -->
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Surprise message">
+      <div class="shine"></div>
+      <div class="modalTop">
+        <div style="font-weight:900;">Surprise for you 🥹</div>
+        <button class="x" id="closeBtn" aria-label="Close">✕</button>
+      </div>
+      <div class="modalBody">
+        <p class="bigMessage" id="surpriseTitle">I choose you—again and again.</p>
+        <p class="smallMessage" id="surpriseBody">
+          No matter how busy the days get, you’re my favorite part of life.
+          Thank you for loving me the way you do. Happy monthssary, my baby. 💗
+        </p>
+        <div class="gift">
+          <span class="tag">more dates</span>
+          <span class="tag">more kisses</span>
+          <span class="tag">more us</span>
+          <span class="tag">forever energy</span>
+        </div>
+        <button class="btn" id="copyBtn" style="width: fit-content;">Copy a sweet line ✨</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Copied! 💗</div>
+
+<script>
+const config = {
+  babyName: "Baby",
+  startDate: "2022-03-11", // YYYY-MM-DD
+  heroLine: "Another month with you feels like a soft sunrise warm, calm, and something I always want to wake up to.",
+  letter: `Baby, happy monthssary. Thank you for being my safe place, my favorite person, my best friend, my companion.
+          I love the way you make ordinary moments feel special. I’m proud of us of how we keep choosing each other. This month, I’m wishing for more laughs, more hugs, more “I miss you” moments that end in “I’m here now.”
+Always remember: I’m with you, I’m for you, and I’m grateful for you. 💗`,
+  surpriseTitle: "I choose you—again and again.",
+  surpriseBody: "No matter how busy the days get, you’re my favorite part of life. Thank you for loving me the way you do. Happy monthssary, by. 💗",
+  copyLines: [
+    "Happy monthssary, baby. You’re my favorite person. 💗",
+    "I’ll keep choosing you—every day, every month.",
+    "You feel like home to me.",
+    "Thank you for loving me softly and truly."
+  ]
+};
+
+function ordinal(n){
+  const s = ["th","st","nd","rd"];
+  const v = n % 100;
+  return n + (s[(v-20)%10] || s[v] || s[0]);
+}
+
+function monthsSinceStart(start, now){
+  const startY = start.getFullYear();
+  const startM = start.getMonth();
+  const nowY = now.getFullYear();
+  const nowM = now.getMonth();
+
+  let months = (nowY - startY) * 12 + (nowM - startM);
+
+  const anniversaryDay = start.getDate(); // 11
+  if (now.getDate() < anniversaryDay) months -= 1;
+
+  return Math.max(0, months);
+}
+
+function formatLongDate(d){
+  return new Intl.DateTimeFormat(undefined, { year:"numeric", month:"long", day:"numeric" }).format(d);
+}
+
+// Apply config + auto dates/count
+const start = new Date(config.startDate + "T00:00:00");
+const now = new Date();
+
+const monthCount = monthsSinceStart(start, now);
+document.getElementById("monthsOrdinal").textContent = ordinal(monthCount);
+document.getElementById("sinceText").textContent = "Since " + formatLongDate(start);
+document.getElementById("dateText").textContent = formatLongDate(now);
+
+document.getElementById("babyName").textContent = config.babyName;
+document.getElementById("heroLine").textContent = config.heroLine;
+document.getElementById("letter").textContent = config.letter;
+document.getElementById("surpriseTitle").textContent = config.surpriseTitle;
+document.getElementById("surpriseBody").textContent = config.surpriseBody;
+
+// Floating hearts generator
+const hearts = document.getElementById("hearts");
+const HEART_COUNT = 26;
+
+function rand(min, max){ return Math.random() * (max - min) + min; }
+
+for(let i=0;i<HEART_COUNT;i++){
+  const h = document.createElement("div");
+  h.className = "heart";
+  const size = rand(10, 18);
+  h.style.width = size + "px";
+  h.style.height = size + "px";
+  h.style.left = rand(0, 100) + "vw";
+  h.style.animationDuration = rand(8, 18) + "s";
+  h.style.animationDelay = rand(-18, 0) + "s";
+
+  const tint = Math.random();
+  if(tint < 0.33) h.style.background = "rgba(255,90,165,.75)";
+  else if(tint < 0.66) h.style.background = "rgba(138,125,255,.55)";
+  else h.style.background = "rgba(255,143,195,.65)";
+
+  hearts.appendChild(h);
+}
+
+// Modal logic
+const overlay = document.getElementById("overlay");
+const openBtn = document.getElementById("openBtn");
+const closeBtn = document.getElementById("closeBtn");
+
+function openModal(){
+  overlay.classList.add("show");
+  overlay.setAttribute("aria-hidden", "false");
+}
+function closeModal(){
+  overlay.classList.remove("show");
+  overlay.setAttribute("aria-hidden", "true");
+}
+
+openBtn.addEventListener("click", openModal);
+closeBtn.addEventListener("click", closeModal);
+overlay.addEventListener("click", (e)=>{ if(e.target === overlay) closeModal(); });
+document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeModal(); });
+
+// Copy sweet line
+const toast = document.getElementById("toast");
+const copyBtn = document.getElementById("copyBtn");
+
+function showToast(){
+  toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"), 1200);
+}
+
+copyBtn.addEventListener("click", async ()=>{
+  const line = config.copyLines[Math.floor(Math.random() * config.copyLines.length)];
+  try{
+    await navigator.clipboard.writeText(line);
+    showToast();
+  }catch{
+    const temp = document.createElement("textarea");
+    temp.value = line;
+    document.body.appendChild(temp);
+    temp.select();
+    document.execCommand("copy");
+    document.body.removeChild(temp);
+    showToast();
+  }
+});
+</script>
+
+</body>
+</html>
