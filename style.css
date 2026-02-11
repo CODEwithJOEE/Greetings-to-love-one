@@ -517,3 +517,8 @@
   background: radial-gradient(circle, rgba(255,90,165,.25), transparent 60%);
   pointer-events:none;
 }
+#timeTogether{
+  margin-top: 10px;
+  font-weight: 700;
+  color: rgba(43,43,43,.70);
+}

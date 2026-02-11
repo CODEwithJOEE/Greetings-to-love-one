@@ -1,16 +1,25 @@
 const config = {
   babyName: "Baby",
   startDate: "2022-03-11", // YYYY-MM-DD
-  heroLine: "Another month with you feels like a soft sunrise warm, calm, and something I always want to wake up to.",
+
+  // Kicker + hero text (auto-switch on anniversaries)
+  anniversaryKicker: "Happy Anniversary",
+  monthssaryKicker: "Happy Monthssary",
+
+  monthssaryHeroLine: "Another month with you feels like a soft sunrise—warm, calm, and something I always want to wake up to.",
+  anniversaryHeroLine: "Another year with you feels like home—steady, safe, and my favorite place to be. Happy anniversary, my love. 💗",
+
   letter: `Baby, happy monthssary. Thank you for being my safe place, my favorite person, my best friend, my companion.
 I love the way you make ordinary moments feel special. I’m proud of us of how we keep choosing each other. This month, I’m wishing for more laughs, more hugs, more “I miss you” moments that end in “I’m here now.”
 Always remember: I’m with you, I’m for you, and I’m grateful for you. 💗`,
+
   copyLines: [
     "Happy monthssary, baby. You’re my favorite person. 💗",
     "I’ll keep choosing you—every day, every month.",
     "You feel like home to me.",
     "Thank you for loving me softly and truly."
   ],
+
   surprises: [
     {
       title: "I choose you—again and again.",
@@ -36,6 +45,10 @@ function ordinal(n){
   return n + (s[(v-20)%10] || s[v] || s[0]);
 }
 
+function plural(n, word){
+  return n === 1 ? word : word + "s";
+}
+
 function monthsSinceStart(start, now){
   const startY = start.getFullYear();
   const startM = start.getMonth();
@@ -44,6 +57,7 @@ function monthsSinceStart(start, now){
 
   let months = (nowY - startY) * 12 + (nowM - startM);
 
+  // Changes on the same day-of-month as your start date (11th)
   const anniversaryDay = start.getDate();
   if (now.getDate() < anniversaryDay) months -= 1;
 
@@ -54,22 +68,64 @@ function formatLongDate(d){
   return new Intl.DateTimeFormat(undefined, { year:"numeric", month:"long", day:"numeric" }).format(d);
 }
 
-// Apply config + auto dates/count
+function yearsMonthsFromTotal(totalMonths){
+  const years = Math.floor(totalMonths / 12);
+  const months = totalMonths % 12;
+  return { years, months };
+}
+
+// ===== Apply config + auto dates/count =====
 const start = new Date(config.startDate + "T00:00:00");
 const now = new Date();
 
 const monthCount = monthsSinceStart(start, now);
+const isAnniversary = (monthCount > 0 && monthCount % 12 === 0);
+
+// Badge values
 document.getElementById("monthsOrdinal").textContent = ordinal(monthCount);
 document.getElementById("sinceText").textContent = "Since " + formatLongDate(start);
 document.getElementById("dateText").textContent = formatLongDate(now);
 
+// Name
 document.getElementById("babyName").textContent = config.babyName;
-document.getElementById("heroLine").textContent = config.heroLine;
 
-// Keep line breaks in the letter:
+// Kicker + hero line switch
+const kickerEl = document.getElementById("kickerText");
+const heroEl = document.getElementById("heroLine");
+
+if (isAnniversary){
+  kickerEl.textContent = config.anniversaryKicker;
+  heroEl.textContent = config.anniversaryHeroLine;
+} else {
+  kickerEl.textContent = config.monthssaryKicker;
+  heroEl.textContent = config.monthssaryHeroLine;
+}
+
+// "It's been X years and Y months" line
+const { years, months } = yearsMonthsFromTotal(monthCount);
+let togetherText = "It’s been ";
+
+if (years > 0) togetherText += `${years} ${plural(years, "year")}`;
+if (months > 0) togetherText += `${years > 0 ? " and " : ""}${months} ${plural(months, "month")}`;
+if (years === 0 && months === 0) togetherText += "0 months";
+
+togetherText += " 💗";
+
+const timeTogetherEl = document.getElementById("timeTogether");
+if (timeTogetherEl) timeTogetherEl.textContent = togetherText;
+
+// Letter (keep line breaks)
 document.getElementById("letter").innerHTML = config.letter.replace(/\n/g, "<br>");
 
-// Floating hearts generator
+// Tab title (also switches on anniversaries)
+if (isAnniversary){
+  const yrs = Math.floor(monthCount / 12);
+  document.title = `Happy ${ordinal(yrs)} Anniversary, ${config.babyName} 💗`;
+} else {
+  document.title = `Happy ${ordinal(monthCount)} Monthssary, ${config.babyName} 💗`;
+}
+
+// ===== Floating hearts generator =====
 const hearts = document.getElementById("hearts");
 const HEART_COUNT = 26;
 
@@ -93,7 +149,7 @@ for(let i=0;i<HEART_COUNT;i++){
   hearts.appendChild(h);
 }
 
-// Modal logic + focus restore + scroll lock
+// ===== Modal logic + focus restore + scroll lock =====
 const overlay = document.getElementById("overlay");
 const openBtn = document.getElementById("openBtn");
 const closeBtn = document.getElementById("closeBtn");
@@ -123,7 +179,7 @@ function pickNewSurprise(){
   return list[i];
 }
 
-// Burst canvas
+// ===== Burst canvas =====
 const burstCanvas = document.getElementById("burst");
 const btx = burstCanvas.getContext("2d");
 
@@ -154,7 +210,6 @@ function burstHearts(){
     t++;
     btx.clearRect(0,0,W,H);
 
-    // alternating pink/lav look (without setting many styles)
     parts.forEach((p, idx)=>{
       p.x += p.vx;
       p.y += p.vy;
@@ -196,7 +251,6 @@ function closeModal(){
   overlay.classList.remove("show");
   overlay.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
-
   if(lastFocus) lastFocus.focus();
 }
 
@@ -205,9 +259,10 @@ closeBtn.addEventListener("click", closeModal);
 overlay.addEventListener("click", (e)=>{ if(e.target === overlay) closeModal(); });
 document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeModal(); });
 
-// Copy sweet line
+// ===== Toast + Copy + Share =====
 const toast = document.getElementById("toast");
 const copyBtn = document.getElementById("copyBtn");
+const shareBtn = document.getElementById("shareBtn");
 
 function showToast(){
   toast.classList.add("show");
@@ -230,22 +285,18 @@ copyBtn.addEventListener("click", async ()=>{
   }
 });
 
-// Share button (mobile-friendly)
-document.getElementById("shareBtn").addEventListener("click", async ()=>{
+shareBtn.addEventListener("click", async ()=>{
   const text =
     `${document.getElementById("surpriseTitle").textContent}\n\n` +
     `${document.getElementById("surpriseBody").textContent}`;
 
   if(navigator.share){
-    try{
-      await navigator.share({ title: "For you 💗", text });
-    }catch{}
+    try{ await navigator.share({ title: "For you 💗", text }); }catch{}
   }else{
     try{
       await navigator.clipboard.writeText(text);
       showToast();
     }catch{
-      // fallback
       const temp = document.createElement("textarea");
       temp.value = text;
       document.body.appendChild(temp);
@@ -259,3 +310,4 @@ document.getElementById("shareBtn").addEventListener("click", async ()=>{
 
 // Initial tags render
 renderTags(config.surprises?.[0]?.tags || []);
+
