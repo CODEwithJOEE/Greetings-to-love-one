@@ -20,23 +20,68 @@ Always remember: I’m with you, I’m for you, and I’m grateful for you. 💗
     "Thank you for loving me softly and truly."
   ],
 
-  surprises: [
-    {
-      title: "I choose you—again and again.",
-      body: "No matter how busy the days get, you’re my favorite part of life. Happy monthssary, my baby. 💗",
-      tags: ["more dates", "more kisses", "more us", "forever energy"]
-    },
-    {
-      title: "Still my favorite hello.",
-      body: "Even after all this time, you’re the one I want to tell everything to. Happy monthssary, baby. 💗",
-      tags: ["soft love", "safe home", "always you", "steady hearts"]
-    },
-    {
-      title: "You’re my calm.",
-      body: "Thank you for being the peace I didn’t know I needed. I love you. 💗",
-      tags: ["gentle days", "warm hugs", "deep talks", "us always"]
-    }
-  ]
+surprises: [
+  {
+    title: "I choose you—again and again.",
+    body: "No matter how busy the days get, you’re my favorite part of life. Happy monthssary, my baby. 💗",
+    tags: ["more dates", "more kisses", "more us", "forever energy"]
+  },
+  {
+    title: "Still my favorite hello.",
+    body: "Even after all this time, you’re the one I want to tell everything to. Happy monthssary, baby. 💗",
+    tags: ["soft love", "safe home", "always you", "steady hearts"]
+  },
+  {
+    title: "You’re my calm.",
+    body: "Thank you for being the peace I didn’t know I needed. I love you. 💗",
+    tags: ["gentle days", "warm hugs", "deep talks", "us always"]
+  },
+  {
+    title: "You’re my favorite habit.",
+    body: "Loving you feels natural—like breathing, like home, like something I never want to stop doing. Happy monthssary, baby. 💗",
+    tags: ["daily love", "my person", "sweet routine", "always mine"]
+  },
+  {
+    title: "I’m proud of us.",
+    body: "Look at how far we’ve come. Still choosing each other. Still growing. Still us. Happy monthssary, my love. 💗",
+    tags: ["growth", "real love", "strong us", "forever team"]
+  },
+  {
+    title: "You make life softer.",
+    body: "Even the hard days feel lighter just because you exist in my world. Thank you for being you. 💗",
+    tags: ["softness", "comfort love", "my peace", "you & me"]
+  },
+  {
+    title: "You’re my safe place.",
+    body: "No matter what happens out there, with you I can breathe. I can be me. I can rest. Happy monthssary, baby. 💗",
+    tags: ["safe love", "home vibes", "you’re mine", "resting hearts"]
+  },
+  {
+    title: "I love the way you love me.",
+    body: "The little things you do… the way you care… it makes me feel so loved. I’ll never stop appreciating you. 💗",
+    tags: ["appreciation", "soft romance", "loved loud", "sweet us"]
+  },
+  {
+    title: "You’re still my favorite person.",
+    body: "If I had to choose all over again, I’d still pick you—every time. Happy monthssary, my baby. 💗",
+    tags: ["always you", "soul love", "chosen", "endless"]
+  },
+  {
+    title: "I want more of you.",
+    body: "More laughs. More kisses. More late-night talks. More everything—with you. Happy monthssary, baby. 💗",
+    tags: ["more us", "future love", "endless kisses", "together always"]
+  },
+  {
+    title: "You’re my favorite future.",
+    body: "I don’t just love you now—I love the life we’re building. Happy monthssary, my love. 💗",
+    tags: ["our future", "building together", "forever plans", "soft dreams"]
+  },
+  {
+    title: "My heart still gets excited.",
+    body: "Even now, you still give me butterflies. Like… how did I get this lucky? Happy monthssary, baby. 💗",
+    tags: ["butterflies", "lucky love", "still obsessed", "sweet rush"]
+  }
+]
 };
 
 function ordinal(n){
